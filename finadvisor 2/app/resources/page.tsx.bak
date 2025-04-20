@@ -1,0 +1,198 @@
+"use client"
+
+import { useState } from 'react'
+import Link from 'next/link'
+import Image from 'next/image'
+import { motion } from 'framer-motion'
+import RiskCalculator from '@/components/RiskCalculator'
+
+export default function Resources() {
+  const [activeTab, setActiveTab] = useState('guides')
+  
+  const resources = {
+    guides: [
+      {
+        title: 'The Complete Guide to Financial Risk Assessment for Startups',
+        description: 'Learn the fundamentals of financial risk assessment and why it's critical for startup success.',
+        image: 'https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+        link: '/resources/startup-risk-guide',
+      },
+      {
+        title: 'Understanding Financial Risk Categories',
+        description: 'A comprehensive breakdown of different financial risk categories and how they affect your business.',
+        image: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2015&q=80',
+        link: '/resources/risk-categories',
+      },
+      // Add more guides here
+    ],
+    templates: [
+      {
+        title: 'Financial Risk Assessment Template',
+        description: 'A comprehensive template to assess and document financial risks in your organization.',
+        image: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80',
+        link: '/resources/risk-assessment-template',
+      },
+      // Add more templates here
+    ],
+    webinars: [
+      {
+        title: 'Building a Risk-Aware Culture in Your Organization',
+        description: 'Learn strategies for fostering a culture where risk management is everyone's responsibility.',
+        image: 'https://images.unsplash.com/photo-1543269865-cbf427effbad?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+        date: 'August 10, 2023',
+        link: '/resources/webinar-risk-culture',
+      },
+      // Add more webinars here
+    ],
+  }
+
+  return (
+    <div className="bg-white dark:bg-gray-900">
+      {/* Header */}
+      <div className="relative bg-indigo-600 dark:bg-indigo-800">
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-indigo-600 mix-blend-multiply" />
+        </div>
+        <div className="relative max-w-7xl mx-auto py-24 px-4 sm:py-32 sm:px-6 lg:px-8">
+          <h1 className="text-4xl font-extrabold tracking-tight text-white sm:text-5xl lg:text-6xl">Resources</h1>
+          <p className="mt-6 max-w-3xl text-xl text-indigo-100">
+            Educational materials to help you understand and manage financial risks effectively.
+          </p>
+        </div>
+      </div>
+
+      {/* Resource Navigation */}
+      <div className="bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="border-b border-gray-200 dark:border-gray-700">
+            <nav className="-mb-px flex space-x-8" aria-label="Tabs">
+              {['guides', 'templates', 'webinars'].map((tab) => (
+                <button
+                  key={tab}
+                  onClick={() => setActiveTab(tab)}
+                  className={`${
+                    activeTab === tab
+                      ? 'border-indigo-500 text-indigo-600 dark:text-indigo-400'
+                      : 'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300 dark:text-gray-400 dark:hover:text-gray-300'
+                  } whitespace-nowrap py-4 px-1 border-b-2 font-medium text-sm capitalize`}
+                >
+                  {tab}
+                </button>
+              ))}
+            </nav>
+          </div>
+        </div>
+      </div>
+
+      {/* Resource Cards */}
+      <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          {resources[activeTab as keyof typeof resources].map((resource, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.3, delay: index * 0.1 }}
+              className="flex flex-col rounded-lg shadow-lg overflow-hidden"
+            >
+              <div className="flex-shrink-0">
+                <Image
+                  className="h-48 w-full object-cover"
+                  src={resource.image}
+                  alt={resource.title}
+                  width={400}
+                  height={200}
+                />
+              </div>
+              <div className="flex-1 bg-white dark:bg-gray-800 p-6 flex flex-col justify-between">
+                <div className="flex-1">
+                  <Link href={resource.link} className="block">
+                    <p className="text-xl font-semibold text-gray-900 dark:text-white">{resource.title}</p>
+                    <p className="mt-3 text-base text-gray-500 dark:text-gray-400">{resource.description}</p>
+                  </Link>
+                </div>
+                <div className="mt-6">
+                  {'date' in resource && (
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      <time dateTime={resource.date}>{resource.date}</time>
+                    </p>
+                  )}
+                  <div className="mt-3">
+                    <Link
+                      href={resource.link}
+                      className="text-base font-semibold text-indigo-600 dark:text-indigo-400 hover:text-indigo-500"
+                    >
+                      {activeTab === 'webinars' ? 'Watch recording' : 'Learn more'}
+                    </Link>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+
+      {/* Risk Calculator Section */}
+      <div className="bg-gray-50 dark:bg-gray-800">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:py-16 sm:px-6 lg:px-8">
+          <div className="max-w-3xl mx-auto text-center">
+            <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white">
+              Try Our Risk Assessment Calculator
+            </h2>
+            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+              Get a preliminary assessment of your financial risk profile with our interactive calculator.
+            </p>
+          </div>
+          <div className="mt-12">
+            <RiskCalculator />
+          </div>
+        </div>
+      </div>
+
+      {/* Newsletter Signup */}
+      <div className="bg-white dark:bg-gray-900">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8">
+          <div className="px-6 py-6 bg-indigo-700 dark:bg-indigo-800 rounded-lg md:py-12 md:px-12 lg:py-16 lg:px-16 xl:flex xl:items-center">
+            <div className="xl:w-0 xl:flex-1">
+              <h2 className="text-2xl font-extrabold tracking-tight text-white sm:text-3xl">
+                Stay updated with our latest resources
+              </h2>
+              <p className="mt-3 max-w-3xl text-lg leading-6 text-indigo-200">
+                Sign up for our newsletter to receive the latest guides, templates, and webinar announcements.
+              </p>
+            </div>
+            <div className="mt-8 sm:w-full sm:max-w-md xl:mt-0 xl:ml-8">
+              <form className="sm:flex">
+                <label htmlFor="email-address" className="sr-only">
+                  Email address
+                </label>
+                <input
+                  id="email-address"
+                  name="email"
+                  type="email"
+                  autoComplete="email"
+                  required
+                  className="w-full border-white px-5 py-3 placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white rounded-md"
+                  placeholder="Enter your email"
+                />
+                <button
+                  type="submit"
+                  className="mt-3 w-full flex items-center justify-center px-5 py-3 border border-transparent shadow text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-indigo-700 focus:ring-white sm:mt-0 sm:ml-3 sm:w-auto sm:flex-shrink-0"
+                >
+                  Subscribe
+                </button>
+              </form>
+              <p className="mt-3 text-sm text-indigo-200">
+                We care about your data. Read our{' '}
+                <a href="/privacy" className="text-white font-medium underline">
+                  Privacy Policy
+                </a>
+                .
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}

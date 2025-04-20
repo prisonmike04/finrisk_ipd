@@ -1,0 +1,15 @@
+{
+    "city": "Mumbai",
+    "industry": "Fintech",
+    "sample_startups_level": "Series A",
+    "sample_startups_rating": 4.5,
+    "sample_startups_publishedon": "2022-01-20",
+    "sample_startups_registeredon": "2021-12-15",
+    "founded": "2020-05-08",
+    "funding_amount": 4500000,
+    "month": 48,
+    "dpiit_funding_in_state": 12500000000,
+    "company_age": 3.9,
+    "funding_per_year": 1153846,
+    "funding_with_noise": 1150000
+  }
