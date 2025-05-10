@@ -41,7 +41,6 @@ pip install -r requirements.txt
 uvicorn main:app --reload
 
 
-<img width="1470" alt="SCR-20250510-sfsd" src="https://github.com/user-attachments/assets/b9655d77-0ef1-4c70-b8ae-d97d66e22c91" />
 
 
 
